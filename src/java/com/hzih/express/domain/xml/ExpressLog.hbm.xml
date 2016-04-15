@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="express_log" name="com.hzih.express.domain.ExpressLog">
+    <id access="field" name="id" type="java.lang.Long" column="id">
+      <generator class="increment"/>
+    </id>
+    <property name="name" column="name" access="field" type="java.lang.String"/>
+    <property name="sex" column="sex" access="field" type="java.lang.String"/>
+    <property name="nation" column="nation" access="field" type="java.lang.String"/>
+    <property name="birthday" column="birthday" access="field" type="java.lang.String"/>
+    <property name="address" column="address" access="field" type="java.lang.String"/>
+    <property name="idCard" column="idCard" access="field" type="java.lang.String"/>
+    <property name="signDepart" column="signDepart" access="field" type="java.lang.String"/>
+    <property name="validTime" column="validTime" access="field" type="java.lang.String"/>
+    <property name="shapeCode" column="shapeCode" access="field" type="java.lang.String"/>
+    <property name="DN" column="DN" access="field" type="java.lang.String"/>
+    <property name="bitmap" column="bitmap" access="field" type="java.sql.Blob" />
+    <property name="unpack_img" column="unpack_img" access="field" type="java.sql.Blob" />
+    <property name="sender_img" column="sender_img" access="field" type="java.sql.Blob" />
+    <property name="face_img" column="face_img" access="field" type="java.sql.Blob" />
+    <property name="longitude" column="longitude" access="field" type="java.lang.String"/>
+    <property name="latitude" column="latitude" access="field" type="java.lang.String"/>
+    <property name="type" column="type" access="field" type="java.lang.String"/>
+    <property name="contact" access="field" type="java.lang.String"/>
+    <property name="sendTime" column="sendTime" access="field" type="java.util.Date"/>
+    <property name="status"  access="field" type="int"/>
+    <property name="code" length="50" access="field" type="string"/>
+    <property name="xq" length="255" access="field" type="string"/>
+    <property name="compare_time" length="50" access="field" type="java.util.Date"/>
+    <!-- 配置多对一关联关系 -->
+    <many-to-one name="user" class="com.hzih.express.domain.User" fetch="select" property-ref="phone">
+      <!--对应该对象对应数据表的字段-->
+      <column name="phone" length="15" not-null="false" unique="true"/>
+    </many-to-one>
+  </class>
+</hibernate-mapping>

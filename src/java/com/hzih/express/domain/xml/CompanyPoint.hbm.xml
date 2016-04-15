@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class table="company_point" name="com.hzih.express.domain.CompanyPoint">
+        <id access="field" name="id" type="long" length="11">
+            <generator class="increment"/>
+        </id>
+        <property name="name" length="50" access="field" type="string"/>
+        <property name="phone" length="50" access="field" type="string"/>
+        <property name="address" length="50" access="field" type="string"/>
+        <property name="contacts" length="50" access="field" type="string"/>
+
+        <many-to-one name="company" class="com.hzih.express.domain.Company" fetch="select" property-ref="code">
+            <!--对应该对象对应数据表的字段-->
+            <column name="company_code" not-null="false" unique="true"/>
+        </many-to-one>
+
+        <many-to-one name="region" class="com.hzih.express.domain.Region" lazy="false">
+            <!--对应该对象对应数据表的字段-->
+            <column name="region_id" not-null="false" unique="true"/>
+        </many-to-one>
+
+        <set
+                name="users"
+                lazy="false"
+                inverse="true"
+                cascade="all">
+            <key>
+                <column name="company_point_id" not-null="false" unique="true"/>
+            </key>
+            <one-to-many class="com.hzih.express.domain.User"/>
+        </set>
+
+
+        <set
+                name="accounts"
+                lazy="false"
+                inverse="true"
+                cascade="all">
+            <key>
+                <column name="company_point_id" not-null="false" unique="true"/>
+            </key>
+            <one-to-many class="com.hzih.express.domain.Account"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

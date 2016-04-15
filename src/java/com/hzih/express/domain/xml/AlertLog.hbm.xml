@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class table="alert_log" name="com.hzih.express.domain.AlertLog">
+    <id access="field" name="id" type="long" column="id" length="20">
+      <generator class="increment"/>
+    </id>
+      <property name="read_flag" access="field" type="int"/>
+      <property access="field" name="id_card" type="string"  length="50"/>
+      <property name="code" length="50"  access="field" type="string"/>
+      <property name="xq" length="255"  access="field" type="string"/>
+    <property name="log_time" access="field" type="java.util.Date"/>
+  </class>
+</hibernate-mapping>

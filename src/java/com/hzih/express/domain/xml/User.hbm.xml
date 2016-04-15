@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class table="user" name="com.hzih.express.domain.User">
+        <id access="field" name="id" type="long" column="id" length="11">
+            <generator class="increment"/>
+        </id>
+        <property name="express_name" length="20" column="express_name" access="field" type="string"/>
+        <property name="express_number" length="20" column="express_number" access="field" type="string" />
+        <property name="register_time" column="register_time" access="field" type="java.util.Date"/>
+        <property name="modify_time" column="modify_time" access="field" type="java.util.Date"/>
+        <property name="password" length="50" column="password" access="field" type="string"/>
+
+        <property name="idCard" length="15" column="idcard" access="field" type="string"/>
+        <property name="status" length="4" column="status" access="field" type="int"/>
+
+        <!-- 配置一对多关联关系 -->
+        <property name="phone" length="15" column="phone" not-null="false" unique="true" access="field" type="string"/>
+
+        <set
+                name="expressLogs"
+                lazy="false"
+                inverse="true"
+                cascade="all">
+            <key>
+                <column name="phone" length="15" not-null="false" unique="true"/>
+            </key>
+            <one-to-many class="com.hzih.express.domain.User" />
+        </set>
+
+
+        <many-to-one name="companyPoint" class="com.hzih.express.domain.CompanyPoint" lazy="false">
+            <!--对应该对象对应数据表的字段-->
+            <column name="company_point_id" not-null="false" unique="true"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>
